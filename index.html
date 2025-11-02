@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>D° FDZ — Diseño web que vende</title>
+  <meta name="description" content="Transformo ideas en páginas que venden: sitios modernos, rápidos y accesibles para negocios locales y marcas personales." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    
+    select {
+  background-color: #0b0c10; /* Fondo oscuro */
+  color: #edf2f7;           /* Texto claro */
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+}
+
+select option {
+  background-color: #0b0c10; /* Fondo igual al select */
+  color: #edf2f7;            /* Texto visible */
+}
+
+select:hover {
+  border-color: var(--brand);
+}
+
+/* Portafolio: mostrar imagen completa sin franjas */
+/* Portafolio optimizado para imágenes 1900x850 aprox */
+.work .item {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.work .thumb {
+  width: 100%;
+  aspect-ratio: 16 / 7;           /* proporción 2.28:1 como tus imágenes */
+  background: #0b0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  overflow: hidden;
+}
+
+.work .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;             /* muestra toda la imagen sin recorte */
+  background-color: #0b0c10;      /* fondo oscuro si sobra espacio */
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  transition: transform .3s ease, filter .3s ease;
+}
+
+.work .thumb img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.08);
+}
+
+
+
+
+    :root{
+      --bg: #154877;           /* Fondo principal */
+      --panel: #111318;        /* Tarjetas/Secciones */
+      --muted: #9aa3af;        /* Texto secundario */
+      --text: #edf2f7;         /* Texto principal */
+      --brand: #00c2ff;        /* Acento principal (azul eléctrico) */
+      --brand-2: #ffd166;      /* Acento secundario (dorado suave) */
+      --ok: #22c55e;
+      --danger:#ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --maxw: 1160px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(0,194,255,.18), transparent 60%),
+                  radial-gradient(800px 400px at -10% 10%, rgba(255,209,102,.12), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--maxw);margin-inline:auto;padding:0 20px}
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      background:linear-gradient(180deg, var(--brand), #0ea5e9);
+      color:#001018;
+      padding:.9rem 1.2rem;border-radius:14px;font-weight:700;
+      box-shadow: var(--shadow);
+      transition:.2s transform ease, .2s filter ease;
+      border:1px solid rgba(255,255,255,.08)
+    }
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.1)}
+    .btn.alt{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.16)}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(1.2) blur(10px);
+      background:rgba(11,12,16,.6);
+      border-bottom:1px solid rgba(255,255,255,.06)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:.5px}
+    .brand .logo{width:36px;height:36px;border-radius:12px;background:
+      radial-gradient(12px 12px at 70% 30%, #fff, rgba(255,255,255,.6) 40%, transparent 41%),
+      conic-gradient(from 210deg, var(--brand) 0 120deg, var(--brand-2) 120deg 360deg);
+      box-shadow:0 6px 18px rgba(0,194,255,.35), inset 0 0 10px rgba(255,255,255,.25)}
+    nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+    nav a{opacity:.9;padding:.6rem .8rem;border-radius:10px}
+    nav a:hover{background:rgba(255,255,255,.06)}
+    .menu-btn{display:none}
+
+    /* Hero */
+    .hero{padding:80px 0 32px}
+    .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--brand-2);font-weight:700;background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.25);padding:.35rem .7rem;border-radius:999px}
+    h1{font-size: clamp(2rem, 5vw, 3.4rem);margin:.6rem 0 1rem;letter-spacing:.2px}
+    .lead{color:var(--muted);font-size:clamp(1rem, 1.5vw, 1.125rem)}
+    .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .hero .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow)
+    }
+
+    /* Stats strip */
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;text-align:center}
+    .stat b{font-size:1.4rem}
+    .muted{color:var(--muted)}
+
+    /* Sections */
+    section{padding:72px 0}
+    .sec-h{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px;gap:12px}
+    .sec-h h2{margin:0;font-size:clamp(1.4rem,3.5vw,2rem)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin-top:6px}
+
+    /* Services */
+    .chip{display:inline-flex;align-items:center;gap:.45rem;font-size:.86rem;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:.25rem .6rem;border-radius:999px;margin-top:6px}
+
+    /* Portfolio */
+    .work{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .work .item{grid-column:span 6;background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .work .thumb{aspect-ratio:16/10;background:linear-gradient(135deg, rgba(0,194,255,.2), transparent 40%), radial-gradient(200px 100px at 80% 0%, rgba(255,209,102,.15), transparent 60%), #0f1116}
+    .work .meta{padding:14px}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .price{position:relative}
+    .price .tag{position:absolute;top:14px;right:14px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);color:#86efac;padding:.2rem .5rem;border-radius:999px;font-size:.78rem}
+    .price h3{margin-top:0}
+    .price .num{font-size:2rem;font-weight:800}
+    .price ul{padding-left:18px;margin:12px 0 0}
+
+    /* Testimonials */
+    .testi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .quote{display:grid;gap:10px}
+    .quote .who{display:flex;align-items:center;gap:10px}
+    .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg, var(--brand), var(--brand-2))}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    form{display:grid;gap:12px}
+    input, textarea, select{
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
+      color:var(--text);border-radius:12px;padding:.9rem 1rem;font:inherit
+    }
+    textarea{min-height:120px;resize:vertical}
+    label{font-size:.92rem;color:var(--muted)}
+    .note{font-size:.9rem;color:var(--muted)}
+
+    
+    /* Footer */
+    footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero .grid{grid-template-columns:1fr}
+      .grid-3, .pricing, .testi{grid-template-columns:1fr}
+      .work .item{grid-column:span 12}
+      .contact{grid-template-columns:1fr}
+      nav ul{display:none}
+      .menu-btn{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text);padding:.5rem .8rem;border-radius:10px}
+      .mobile-nav{display:none;position:absolute;left:0;right:0;top:64px;background:rgba(11,12,16,.96);border-bottom:1px solid rgba(255,255,255,.06)}
+      .mobile-nav ul{list-style:none;margin:0;padding:10px}
+      .mobile-nav a{display:block;padding:12px;border-radius:10px}
+      .mobile-nav a:hover{background:rgba(255,255,255,.06)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header>
+   <div class="wrap nav">
+    <a href="#" class="brand" aria-label="Inicio">
+      <img src="logo-dfdz.png" alt="Logo D° FDZ" class="logo" style="width:100px; height:auto;" border-radius:12px;">
+      <span></span>
+    </a>
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#trabajos">Portafolio</a></li>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menú ▾</button>
+    </div>
+    <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menú móvil">
+      <ul class="wrap">
+        <li><a href="#servicios" onclick="toggleMenu(false)">Servicios</a></li>
+        <li><a href="#trabajos" onclick="toggleMenu(false)">Portafolio</a></li>
+        <li><a href="#precios" onclick="toggleMenu(false)">Precios</a></li>
+        <li><a href="#contacto" onclick="toggleMenu(false)">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero wrap" id="inicio">
+    <div class="grid">
+      <div>
+        <span class="eyebrow">Webs modernas • Rápidas • Accesibles</span>
+        <h1>Transformo ideas en <span style="background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">páginas que venden</span>.</h1>
+        <p class="lead">Sitios de alto impacto para negocios locales y marcas personales. Diseño, copy y conexión a WhatsApp en horas, no semanas.</p>
+        <div class="ctas">
+          <a class="btn" href="#contacto">Cotiza tu web gratis</a>
+          <a class="btn alt" href="#trabajos">Ver trabajos</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>24–72 h</b><div class="muted">Tiempo de entrega</div></div>
+          <div class="stat"><b>SEO básico</b><div class="muted">Optimización incluida</div></div>
+          <div class="stat"><b>Soporte</b><div class="muted">Durante 30 días</div></div>
+        </div>
+      </div>
+      <div class="panel" aria-label="Mockup de sitio">
+        <!-- Simple mockup frame -->
+        <div style="background:#0e1117;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
+          <div style="display:flex;gap:6px;padding:10px;background:#0a0c10;border-bottom:1px solid rgba(255,255,255,.06)">
+            <span style="width:10px;height:10px;border-radius:50%;background:#ef4444"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#22c55e"></span>
+          </div>
+          <div style="padding:22px;display:grid;gap:12px">
+            <div style="height:180px;border-radius:12px;background:linear-gradient(135deg, rgba(0,194,255,.2), transparent 60%), #10131a"></div>
+            <div style="display:grid;gap:8px">
+              <div style="height:12px;background:rgba(255,255,255,.08);border-radius:8px;width:80%"></div>
+              <div style="height:12px;background:rgba(255,255,255,.08);border-radius:8px;width:65%"></div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <div style="flex:1;height:90px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px"></div>
+              <div style="flex:1;height:90px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Servicios</h2>
+        <a class="btn alt" href="#contacto">Quiero cotizar</a>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <span class="chip">Landing • Sitio informativo</span>
+          <h3>Diseño web</h3>
+          <p class="muted">Páginas rápidas, responsivas y con enfoque a conversión. Conecta a WhatsApp y recibe clientes hoy.</p>
+          <ul>
+            <li>Entrega express 24–72 h</li>
+            <li>SEO y rendimiento básico</li>
+            <li>Integración a redes y Maps</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="chip">Logo • Paleta • Tipos</span>
+          <h3>Branding y contenidos</h3>
+          <p class="muted">Identidad visual simple y sólida para que tu negocio se vea profesional en web y redes.</p>
+          <ul>
+            <li>Logo rápido + guideline simple</li>
+            <li>Copys que sí venden</li>
+            <li>Plantillas para IG / FB</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="chip">IG • FB • Google</span>
+          <h3>Marketing básico</h3>
+          <p class="muted">Setup de perfiles, links y automatizaciones simples. Embudo mínimo viable para empezar a vender.</p>
+          <ul>
+            <li>Botón WhatsApp y CTA claros</li>
+            <li>Google My Business básico</li>
+            <li>Mensajes plantillas</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portafolio -->
+ <!-- Portafolio -->
+<section id="trabajos">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Portafolio</h2>
+      <span class="muted">Muestras representativas</span>
+    </div>
+    <div class="work">
+      <div class="item">
+        <div class="thumb">
+  <img src="img/portfolio/loom-seguros.png" alt="Loom Seguros">
+</div>
+<div class="meta">
+  <b>Loom Seguros</b>
+  <div class="muted">Página completa</div>
+</div>
+      </div>
+      <div class="item">
+        <div class="thumb">
+  <img src="img/portfolio/los-maikis.png" alt="Los Maikis">
+</div>
+<div class="meta">
+  <b>Los Maikis</b>
+  <div class="muted">Landing minimal + ubicación en Maps</div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Precios -->
+  <section id="precios">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Paquetes y precios</h2>
+        <span class="muted">Accesibles para empezar hoy, escalables cuando crezcas.</span>
+      </div>
+      <div class="pricing">
+        <article class="card price">
+          <h3>Starter</h3>
+          <div class="num">$350 MXN</div>
+          <p class="muted">Landing 1 sección • Link a WhatsApp</p>
+          <ul>
+            <li>Diseño base + tus colores</li>
+            <li>1 ronda de cambios</li>
+            <li>Entrega 24 h</li>
+          </ul>
+          <p><a class="btn" href="#contacto">Lo quiero</a></p>
+        </article>
+        <article class="card price">
+          <span class="tag">Más vendido</span>
+          <h3>Pro</h3>
+          <div class="num">$999 MXN</div>
+          <p class="muted">Landing completa 4–5 secciones</p>
+          <ul>
+            <li>Hero, servicios, trabajos, contacto</li>
+            <li>SEO y rendimiento básico</li>
+            <li>2 rondas de cambios</li>
+          </ul>
+          <p><a class="btn" href="#contacto">Elegir Pro</a></p>
+        </article>
+        <article class="card price">
+          <h3>Negocio</h3>
+          <div class="num">Desde $1,799 MXN</div>
+          <p class="muted">Sitio a medida + extras</p>
+          <ul>
+            <li>Secciones a medida</li>
+            <li>Formularios / Integraciones</li>
+            <li>Soporte 30 días</li>
+          </ul>
+          <p><a class="btn" href="#contacto">Hablar detalles</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section>
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Lo que dicen</h2>
+      </div>
+      <div class="testi">
+        <article class="card quote">
+          <div>“En menos de 24 horas ya tenía mi página, bastamte cumplidos”</div>
+          <div class="who"><span class="avatar"></span><div><b>Luis</b><div class="muted">Barbería Norte</div></div></div>
+        </article>
+        <article class="card quote">
+          <div>“Se ve profesional y carga rápido. Ahora mando a todos a mi pagina web.”</div>
+          <div class="who"><span class="avatar"></span><div><b>Mariana</b><div class="muted">sin nombre</div></div></div>
+        </article>
+        <article class="card quote">
+          <div>“Cumplido, directo y con buenas ideas. Recomendado.”</div>
+          <div class="who"><span class="avatar"></span><div><b>Laura</b><div class="muted">Loom seguros</div></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>Agenda tu web</h2>
+        <span class="muted">Cuéntame de tu negocio y te respondo hoy.</span>
+      </div>
+      <div class="contact">
+        <form id="leadForm" aria-label="Formulario de contacto">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div>
+            <label for="negocio">Negocio / marca</label>
+            <input id="negocio" name="negocio" placeholder="Ej. Barbería Norte" required />
+          </div>
+          <div>
+            <label for="whatsapp">WhatsApp</label>
+            <input id="whatsapp" name="whatsapp" placeholder="Ej. 81 1234 5678" />
+          </div>
+          <div>
+            <label for="paquete">Paquete</label>
+            <select id="paquete" name="paquete">
+              <option>Starter — $400</option>
+              <option>Pro — $999</option>
+              <option>Negocio — A medida</option>
+            </select>
+          </div>
+          <div>
+            <label for="mensaje">¿Qué necesitas?</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Cuéntame brevemente lo que quieres lograr"></textarea>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button type="submit" class="btn">Enviar por WhatsApp</button>
+            <span id="formNote" class="note">Se abrirá WhatsApp con tu mensaje listo.</span>
+          </div>
+        </form>
+        <div class="card">
+          <h3>Contacto directo</h3>
+          <p class="muted">Prefieres mensaje al instante:</p>
+          <p><a class="btn" id="waDirect" href="#">Escríbeme ahora</a></p>
+          <hr style="border-color:rgba(0, 0, 0, 0.418)">
+          <h3>¿Qué incluye?</h3>
+          <ul>
+            <li>Entrega rápida</li>
+            <li>Optimización básica (SEO + Performance)</li>
+            <li>Soporte inicial y guía de uso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redes sociales -->
+<section id="redes">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2>Sígueme y conoce más</h2>
+      <span class="muted">Conecta conmigo en redes para ver proyectos y tips de diseño.</span>
+    </div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+      <a href="https://www.instagram.com/degradofernandez/" target="_blank" class="btn" style="background:#E1306C;">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61579324863035" target="_blank" class="btn" style="background:#1877F2;">Facebook</a>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> D° FDZ — Diseño web con propósito.</div>
+      <div style="display:flex;gap:10px">
+        <a class="muted" href="#">Aviso de privacidad</a>
+        <a class="muted" href="#inicio">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ======= CONFIGURA AQUÍ TU WHATSAPP =======
+    const WA_NUMBER = '5218184768877'; // Reemplaza con tu número (formato internacional, ej. 5218112345678)
+
+    // Utilidad: construir link a WhatsApp con texto
+    function waLink(text){
+      const t = encodeURIComponent(text);
+      return `https://wa.me/${8184768877}?text=${t}`;
+    }
+
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú móvil toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    function toggleMenu(force){
+      const show = typeof force === 'boolean' ? force : mobileNav.style.display !== 'block';
+      mobileNav.style.display = show ? 'block' : 'none';
+      menuBtn.setAttribute('aria-expanded', show);
+    }
+    menuBtn?.addEventListener('click', () => toggleMenu());
+
+    // CTA de contacto directo
+    const waDirect = document.getElementById('waDirect');
+    if(waDirect){
+      waDirect.href = waLink('Hola, vi tu sitio y quiero cotizar mi página 🙌');
+    }
+
+    // Envío del formulario -> abre WhatsApp con mensaje formateado
+    const form = document.getElementById('leadForm');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const negocio = document.getElementById('negocio').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const paquete = document.getElementById('paquete').value;
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      const text = `Hola 👋 soy ${nombre}.\nQuiero una web para: ${negocio}.\nPaquete: ${paquete}.\nWhatsApp: ${whatsapp || 'N/A'}.\nMensaje: ${mensaje || '—'}`;
+      window.open(waLink(text), '_blank');
+    });
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
